@@ -299,6 +299,12 @@ discord.js@^13.1.0:
     node-fetch "^2.6.1"
     ws "^7.5.1"
 
+dokdo@wonderlandpark/dokdo:
+  version "0.5.0"
+  resolved "https://codeload.github.com/wonderlandpark/dokdo/tar.gz/d5281bda790f01ec6f513d4e6c23eb9c77237845"
+  dependencies:
+    node-fetch "^2.6.1"
+
 dot-prop@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/dot-prop/-/dot-prop-6.0.1.tgz#fc26b3cf142b9e59b74dbd39ed66ce620c681083"
