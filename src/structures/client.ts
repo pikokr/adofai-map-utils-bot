@@ -14,7 +14,7 @@ export class Client extends CommandClient {
                 prefix: '!!',
             },
             slashCommands: {
-                autoSync: true,
+                autoSync: config.slash.autoSync !== false,
                 guild: config.slash.guild,
             },
         })
