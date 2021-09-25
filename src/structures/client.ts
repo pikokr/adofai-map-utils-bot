@@ -1,5 +1,5 @@
 import { CommandClient } from '@pikokr/command.ts'
-import Discord, { Intents, IntentsString, Message } from 'discord.js'
+import Discord, { Intents, IntentsString } from 'discord.js'
 import { config } from '../config'
 import Dokdo from 'dokdo'
 
@@ -24,10 +24,11 @@ export class Client extends CommandClient {
 
     async ready(): Promise<void> {
         await super.ready()
-        new Dokdo(this.client, {
+        const dokdo = new Dokdo(this.client, {
             prefix: '.',
-            noPerm(message: Message): any {},
+            noPerm(): any {},
             owners: this.owners,
         })
+        this.client.on('messageCreate', (msg) => dokdo.run(msg))
     }
 }
