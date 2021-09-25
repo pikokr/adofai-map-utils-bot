@@ -6,7 +6,7 @@ export class Client extends CommandClient {
     constructor() {
         super({
             client: new Discord.Client({
-                intents: Object.keys(Intents.FLAGS) as IntentsString[],
+                intents: Object.keys(Intents.FLAGS).filter(x=>!(['GUILD_MEMBERS', 'GUILD_PRESENCES'] as IntentsString[]).includes(x as IntentsString)) as IntentsString[],
             }),
             owners: 'auto',
             command: {
