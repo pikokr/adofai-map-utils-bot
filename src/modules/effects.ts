@@ -1,5 +1,4 @@
 import { option, slashCommand } from '@pikokr/command.ts'
-import { Client } from '../structures/client'
 import { bold, inlineCode, SlashCommandBuilder, underscore } from '@discordjs/builders'
 import { CommandInteraction, Message, MessageActionRow, MessageAttachment, MessageButton, MessageSelectMenu, SelectMenuInteraction } from 'discord.js'
 import { ModdedModule } from '../structures/ModdedModule'
@@ -104,6 +103,20 @@ class Effects extends ModdedModule {
                 const allowed = ['SetSpeed', 'Twirl', 'SetHitsound', 'Checkpoint']
 
                 map.actions = map.actions.filter((x: { eventType: string }) => allowed.includes(x.eventType))
+
+                const setSppedList = (map.actions.filter((x: { eventType: string }) => x.eventType === 'SetSpeed') as { floor: number, speedType: string, beatsPerMinute: number, bpmMultiplier: number }[]).sort((x, y) => x.floor - y.floor)
+
+                let currentBpm = map.settings.bpm
+
+                for (const action of setSppedList) {
+                    if (action.speedType === 'Multiplier') {
+                        action.speedType = 'Bpm'
+                        action.beatsPerMinute = currentBpm * action.bpmMultiplier
+                        currentBpm = action.beatsPerMinute
+                    } else {
+                        currentBpm = action.beatsPerMinute
+                    }
+                }
 
                 map.settings.relativeTo = 'Player'
 

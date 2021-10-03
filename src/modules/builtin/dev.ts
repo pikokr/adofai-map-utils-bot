@@ -1,25 +1,25 @@
-import { BuiltInModule, ownerOnly, slashCommand } from '@pikokr/command.ts'
+import { BuiltInModule, command, ownerOnly } from '@pikokr/command.ts'
 import { Client } from '../../structures/client'
-import { SlashCommandBuilder } from '@discordjs/builders'
-import { CommandInteraction } from 'discord.js'
+import { Message } from 'discord.js'
 
 class Dev extends BuiltInModule {
     constructor(private cts: Client) {
         super()
     }
 
-    @slashCommand({
-        command: new SlashCommandBuilder().setName('reload').setDescription('리로드 커맨드'),
-    })
+    @command()
     @ownerOnly
-    async reload(i: CommandInteraction) {
-        await i.deferReply({
-            ephemeral: true,
-        })
+    async reload(msg: Message) {
+        await msg.react('🤔')
         const data = await this.cts.registry.reloadAll()
-        await this.cts.registry.syncCommands()
-        await i.editReply({
-            content: '```\n' + data.map((x) => (x.success ? `✅ ${x.path}` : `❌ ${x.path}\n${x.error}`)).join('\n') + '```',
+        await msg.react('✅')
+        await msg.reply({
+            content:
+                '```\n' +
+                data
+                    .map((x) => (x.success ? `✅ ${x.path}` : `❌ ${x.path}\n${x.error}`))
+                    .join('\n') +
+                '```',
         })
     }
 }
