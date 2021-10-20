@@ -46,7 +46,6 @@ class Effects extends ModdedModule {
         try {
             const i = await m.awaitMessageComponent({
                 filter: async (i) => {
-                    await i.deferReply()
                     return i.user.id === msg.author.id
                 },
             })
