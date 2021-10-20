@@ -17,7 +17,7 @@
         "@pikokr/command.ts": "^3.0.6",
         "discord-api-types": "^0.23.1",
         "discord.js": "^13.1.0",
-        "dokdo": "wonderlandpark/dokdo",
+        "dokdo": "^0.5.1",
         "json5": "^2.2.0",
         "jszip": "^3.7.1",
         "lodash": "^4.17.21",

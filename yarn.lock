@@ -299,9 +299,10 @@ discord.js@^13.1.0:
     node-fetch "^2.6.1"
     ws "^7.5.1"
 
-dokdo@wonderlandpark/dokdo:
-  version "0.5.0"
-  resolved "https://codeload.github.com/wonderlandpark/dokdo/tar.gz/d5281bda790f01ec6f513d4e6c23eb9c77237845"
+dokdo@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/dokdo/-/dokdo-0.5.1.tgz#5974ac32af31fce51935c8036de2667d98e22c9e"
+  integrity sha512-LzPgNtZOBjvDzTUAlRsZMGV/HeFYl8aODhEO6hkVrHBIy7ndZdIrLF0Px9GJ4XSJWp2rnYymJJ1hgHu0B6/4Fg==
   dependencies:
     node-fetch "^2.6.1"
 
