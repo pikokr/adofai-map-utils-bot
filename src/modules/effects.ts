@@ -1,6 +1,16 @@
-import { option, slashCommand } from '@pikokr/command.ts'
+import { command, option, slashCommand } from '@pikokr/command.ts'
 import { bold, inlineCode, SlashCommandBuilder, underscore } from '@discordjs/builders'
-import { CommandInteraction, Message, MessageActionRow, MessageAttachment, MessageButton, MessageSelectMenu, SelectMenuInteraction } from 'discord.js'
+import {
+    CommandInteraction,
+    Interaction,
+    Message,
+    MessageActionRow,
+    MessageAttachment,
+    MessageButton,
+    MessageComponentInteraction,
+    MessageSelectMenu,
+    SelectMenuInteraction,
+} from 'discord.js'
 import { ModdedModule } from '../structures/ModdedModule'
 import fetch from 'node-fetch'
 import JSZip, { JSZipObject } from 'jszip'
@@ -29,7 +39,32 @@ class Effects extends ModdedModule {
             .setDescription('이펙트 제거')
             .addStringOption((builder) => builder.setName('url').setDescription('zip 파일 URL').setRequired(true)),
     })
-    async test(i: CommandInteraction, @option('url') url: string) {
+    async removeEffectSlash(i: CommandInteraction, @option('url') url: string) {
+        return this.executeRemoveEffect(i, url)
+    }
+
+    @command({ name: '이펙트제거' })
+    async removeEffect(msg: Message, url: string) {
+        const m = await msg.channel.send({
+            content: 'ㅁㄴㅇㄹ 귀찮음 대충 버튼누르세요',
+            components: [new MessageActionRow().addComponents(new MessageButton().setLabel('실행').setCustomId('run').setStyle('PRIMARY'))],
+        })
+
+        try {
+            const i = await m.awaitMessageComponent({
+                filter: async (i) => {
+                    await i.deferReply()
+                    return i.user.id === msg.author.id
+                },
+            })
+
+            return this.executeRemoveEffect(i, url)
+        } catch (e) {
+            return
+        }
+    }
+
+    async executeRemoveEffect(i: CommandInteraction | MessageComponentInteraction, url: string) {
         await i.deferReply()
 
         let zip: JSZip
