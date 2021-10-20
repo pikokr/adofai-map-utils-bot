@@ -11,7 +11,7 @@ export class Client extends CommandClient {
             }),
             owners: 'auto',
             command: {
-                prefix: '!!',
+                prefix: '.',
             },
             slashCommands: {
                 autoSync: config.slash.autoSync !== false,
