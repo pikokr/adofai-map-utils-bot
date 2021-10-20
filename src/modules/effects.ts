@@ -104,7 +104,14 @@ class Effects extends ModdedModule {
 
                 map.actions = map.actions.filter((x: { eventType: string }) => allowed.includes(x.eventType))
 
-                const setSppedList = (map.actions.filter((x: { eventType: string }) => x.eventType === 'SetSpeed') as { floor: number, speedType: string, beatsPerMinute: number, bpmMultiplier: number }[]).sort((x, y) => x.floor - y.floor)
+                const setSppedList = (
+                    map.actions.filter((x: { eventType: string }) => x.eventType === 'SetSpeed') as {
+                        floor: number
+                        speedType: string
+                        beatsPerMinute: number
+                        bpmMultiplier: number
+                    }[]
+                ).sort((x, y) => x.floor - y.floor)
 
                 let currentBpm = map.settings.bpm
 

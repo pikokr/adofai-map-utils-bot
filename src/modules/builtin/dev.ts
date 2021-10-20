@@ -14,12 +14,7 @@ class Dev extends BuiltInModule {
         const data = await this.cts.registry.reloadAll()
         await msg.react('✅')
         await msg.reply({
-            content:
-                '```\n' +
-                data
-                    .map((x) => (x.success ? `✅ ${x.path}` : `❌ ${x.path}\n${x.error}`))
-                    .join('\n') +
-                '```',
+            content: '```\n' + data.map((x) => (x.success ? `✅ ${x.path}` : `❌ ${x.path}\n${x.error}`)).join('\n') + '```',
         })
     }
 }

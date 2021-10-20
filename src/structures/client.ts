@@ -26,7 +26,7 @@ export class Client extends CommandClient {
         await super.ready()
         const dokdo = new Dokdo(this.client, {
             prefix: '.',
-            noPerm(): any { },
+            noPerm(): any {},
             owners: this.owners,
         })
         this.client.on('messageCreate', (msg) => dokdo.run(msg))

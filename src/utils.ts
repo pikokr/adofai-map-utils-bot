@@ -1,3 +1,5 @@
+import JSON5 from 'json5'
+
 declare global {
     interface String {
         replaceAll: (org: string, dest: string) => string
@@ -12,7 +14,7 @@ export const LevelParser = (level: string) => {
     try {
         return JSON.parse(level)
     } catch (e) {
-        return JSON.parse(
+        return JSON5.parse(
             String(level)
                 .trim()
                 .replaceAll(', ,', ',')

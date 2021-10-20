@@ -1,6 +1,6 @@
 {
-  "token": "TOKEN_HERE",
-  "slash": {
-    "guild": ""
-  }
+    "token": "TOKEN_HERE",
+    "slash": {
+        "guild": ""
+    }
 }
