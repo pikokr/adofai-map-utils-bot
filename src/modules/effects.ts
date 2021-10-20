@@ -1,16 +1,6 @@
 import { command, option, slashCommand } from '@pikokr/command.ts'
 import { bold, inlineCode, SlashCommandBuilder, underscore } from '@discordjs/builders'
-import {
-    CommandInteraction,
-    Interaction,
-    Message,
-    MessageActionRow,
-    MessageAttachment,
-    MessageButton,
-    MessageComponentInteraction,
-    MessageSelectMenu,
-    SelectMenuInteraction,
-} from 'discord.js'
+import { CommandInteraction, Message, MessageActionRow, MessageAttachment, MessageButton, MessageComponentInteraction, MessageSelectMenu, SelectMenuInteraction } from 'discord.js'
 import { ModdedModule } from '../structures/ModdedModule'
 import fetch from 'node-fetch'
 import JSZip, { JSZipObject } from 'jszip'
@@ -46,8 +36,11 @@ class Effects extends ModdedModule {
     @command({ name: '이펙트제거' })
     async removeEffect(msg: Message, url: string) {
         const m = await msg.channel.send({
-            content: 'ㅁㄴㅇㄹ 귀찮음 대충 버튼누르세요',
+            content: '대충 버튼누르세요\n' + url,
             components: [new MessageActionRow().addComponents(new MessageButton().setLabel('실행').setCustomId('run').setStyle('PRIMARY'))],
+            allowedMentions: {
+                parse: [],
+            },
         })
 
         try {
@@ -58,7 +51,11 @@ class Effects extends ModdedModule {
                 },
             })
 
-            return this.executeRemoveEffect(i, url)
+            try {
+                return this.executeRemoveEffect(i, url)
+            } catch (e) {
+                return msg.reply(`${e}`)
+            }
         } catch (e) {
             return
         }
