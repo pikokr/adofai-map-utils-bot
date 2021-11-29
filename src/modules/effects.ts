@@ -34,7 +34,7 @@ class Effects extends ModdedModule {
     }
 
     @command({ name: '이펙트제거' })
-    async removeEffect(msg: Message, @optional url: string | undefined = msg.attachments.first()?.url) {
+    async removeEffect(msg: Message, @optional url: string = msg.attachments.first()?.url || '') {
         if (!url) return msg.reply('이펙트를 제거할 zip 파일 업로드 또는 링크를 입력해주세ㅐ요.')
         const m = await msg.channel.send({
             content: '대충 버튼누르세요\n' + url,
