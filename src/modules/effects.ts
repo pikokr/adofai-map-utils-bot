@@ -1,4 +1,4 @@
-import { command, option, slashCommand } from '@pikokr/command.ts'
+import { command, option, optional, slashCommand } from '@pikokr/command.ts'
 import { bold, inlineCode, SlashCommandBuilder, underscore } from '@discordjs/builders'
 import { CommandInteraction, Message, MessageActionRow, MessageAttachment, MessageButton, MessageComponentInteraction, MessageSelectMenu, SelectMenuInteraction } from 'discord.js'
 import { ModdedModule } from '../structures/ModdedModule'
@@ -34,7 +34,8 @@ class Effects extends ModdedModule {
     }
 
     @command({ name: '이펙트제거' })
-    async removeEffect(msg: Message, url: string) {
+    async removeEffect(msg: Message, @optional url: string | undefined = msg.attachments.first()?.url) {
+        if (!url) return msg.reply('이펙트를 제거할 zip 파일 업로드 또는 링크를 입력해주세ㅐ요.')
         const m = await msg.channel.send({
             content: '대충 버튼누르세요\n' + url,
             components: [new MessageActionRow().addComponents(new MessageButton().setLabel('실행').setCustomId('run').setStyle('PRIMARY'))],
